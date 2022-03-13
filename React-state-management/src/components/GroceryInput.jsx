@@ -5,7 +5,6 @@ import { GroceryList } from "./GroceryList";
 export const GroceryInput = () => {
   const [item, setItem] = useState("");
   const [grocery_list, setGrocery_list] = useState([]);
-  console.log("grocery_list:", grocery_list);
 
   const handleList = () => {
     const t = {
@@ -15,12 +14,6 @@ export const GroceryInput = () => {
     };
     setGrocery_list([...grocery_list, t]);
     setItem("");
-  };
-
-  const handleToggle = (e) => {
-    let [name, value] = e.target;
-    console.log("e:", e);
-    // setGrocery_list(...GroceryList, )
   };
 
   return (
@@ -34,7 +27,7 @@ export const GroceryInput = () => {
         }}
       />
       <button onClick={handleList}>Save</button>
-      <GroceryList value={grocery_list} Toggle={handleToggle} />
+      <GroceryList value={grocery_list} />
     </div>
   );
 };
