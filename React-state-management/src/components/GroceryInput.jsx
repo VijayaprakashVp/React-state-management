@@ -1,12 +1,26 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 import { GroceryList } from "./GroceryList";
 
-export function GroceryInput() {
-  const [list, setList] = useState("");
+export const GroceryInput = () => {
+  const [item, setItem] = useState("");
   const [grocery_list, setGrocery_list] = useState([]);
+  console.log("grocery_list:", grocery_list);
 
   const handleList = () => {
-    setGrocery_list([...grocery_list, list]);
+    const t = {
+      id: nanoid(),
+      title: item,
+      status: false,
+    };
+    setGrocery_list([...grocery_list, t]);
+    setItem("");
+  };
+
+  const handleToggle = (e) => {
+    let [name, value] = e.target;
+    console.log("e:", e);
+    // setGrocery_list(...GroceryList, )
   };
 
   return (
@@ -14,22 +28,13 @@ export function GroceryInput() {
       <input
         type="text"
         placeholder="Enter list"
+        value={item}
         onChange={(e) => {
-          setList(e.target.value);
+          setItem(e.target.value);
         }}
       />
       <button onClick={handleList}>Save</button>
-      <div>
-        {grocery_list.map((e) => {
-          return (
-            <div>
-              <p>
-                {e} <button>Delete</button>
-              </p>
-            </div>
-          );
-        })}
-      </div>
+      <GroceryList value={grocery_list} Toggle={handleToggle} />
     </div>
   );
-}
+};
